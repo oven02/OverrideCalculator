@@ -1,0 +1,207 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Push Back Score Calculator</title>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <h1>Match Score</h1>
+    <div id="link">
+    <a href="skills.html">Go to Skills</a>
+    </div>
+    <hr />
+    <div id="app">
+        <div class="score-header">
+        <h2 class="red-text">Red: {{ redScore }}</h2>
+        <h2 class="blue-text">Blue: {{ blueScore }}</h2>
+    </div>
+        <hr />
+        <h3>Blocks</h3>
+        <div class="block-controls">
+        <!-- Red Section -->
+        <div class="team-section">
+            <button class="btn-red" @click="addRed()">+</button>
+            <button class="btn-red" @click="subRed()">-</button>
+            <p>Red Pins: <strong>{{redBlocks}}</strong></p>
+        </div>
+        <!-- Blue Section -->
+        <div class="team-section">
+            <button class="btn-blue" @click="addBlue()">+</button>
+            <button class="btn-blue" @click="subBlue()">-</button>
+            <p>Blue Pins: <strong>{{blueBlocks}}</strong></p>
+        </div>
+    </div>
+        <hr />
+        </div>
+        <hr />
+        <h3>Blocks</h3>
+        <div class="block-controls">
+        <!-- Red Section -->
+        <div class="team-section">
+            <button class="btn-red" @click="addNRed()">+</button>
+            <button class="btn-red" @click="subNRed()">-</button>
+            <p>Red Neutral Pins: <strong>{{redNBlocks}}</strong></p>
+        </div>
+        <!-- Blue Section -->
+        <div class="team-section">
+            <button class="btn-blue" @click="addNBlue()">+</button>
+            <button class="btn-blue" @click="subNBlue()">-</button>
+            <p>Blue Neutral Pins: <strong>{{blueNBlocks}}</strong></p>
+        </div>
+    </div>
+        <hr />
+        <button class="btn-red" @click="parkRTogg">Red Parked Robots {{redParked}}</button>
+        <button class="btn-blue" @click="parkBTogg">Blue Parked Robots {{blueParked}}</button>
+    </div>
+
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    redScore: 6,
+                    blueScore: 6,
+                    redBlocks: 0,
+                    blueBlocks: 0,
+                    redNBlocks: 0,
+                    blueNBlocks: 0,
+                    auton:0,
+                    redParked:0,
+                    blueParked:0
+                }
+            },
+            methods: {
+                addRed(){
+                    if(this.redBlocks + this.blueBlocks < 44){
+                    this.redBlocks++
+                    }
+                    this.calScore()
+                },
+                addBlue(){
+                    if(this.redBlocks + this.blueBlocks < 44){
+                    this.blueBlocks++
+                    }
+                    this.calScore()
+                },
+                subRed(){
+                    if(this.redBlocks > 0){
+                    this.redBlocks--
+                    }
+                    this.calScore()
+                },
+                subBlue(){
+                    if(this.blueBlocks > 0){
+                        this.blueBlocks--
+                    }
+                    this.calScore()
+                },
+              addNRed(){
+                    if(this.redNBlocks + this.blueNBlocks < 59){
+                    this.redNBlocks++
+                    }
+                    this.calScore()
+                },
+                addNBlue(){
+                    if(this.redNBlocks + this.blueNBlocks < 59){
+                    this.blueNBlocks++
+                    }
+                    this.calScore()
+                },
+                subNRed(){
+                    if(this.redNBlocks > 0){
+                    this.redNBlocks--
+                    }
+                    this.calScore()
+                },
+                subNBlue(){
+                    if(this.blueNBlocks > 0){
+                        this.blueNBlocks--
+                    }
+                    this.calScore()
+                }
+                autonTogg(){
+                    this.auton ++
+                    if(this.auton > 2){
+                        this.auton = 0
+                    }
+                    this.calScore()
+                },
+                parkRTogg(){
+                    this.redParked ++
+                    if(this.redParked > 2){
+                        this.redParked = 0
+                    }
+                    this.calScore()
+                },
+                parkBTogg(){
+                    this.blueParked ++
+                    if(this.blueParked > 2){
+                        this.blueParked = 0
+                    }
+                    this.calScore()
+                },
+                calScore(){
+                    this.redScore = this.redBlocks * 3
+                    if(this.long1 == 2){
+                        this.redScore += 10
+                    }
+                    if(this.long2 == 2){
+                        this.redScore += 10
+                    }
+                    if(this.low == 2){
+                        this.redScore += 6
+                    }
+                    if(this.middle == 2){
+                        this.redScore += 8
+                    }
+                    if(this.auton == 2){
+                        this.redScore += 12
+                    }
+                    if(this.redParked == 1){
+                        this.redScore += 8
+                    }
+                    if(this.redParked == 2){
+                        this.redScore += 16
+                    }
+
+                    this.blueScore = this.blueBlocks * 3
+                    if(this.long1 == 1){
+                        this.blueScore += 10
+                    }
+                    if(this.long2 == 1){
+                        this.blueScore += 10
+                    }
+                    if(this.low == 1){
+                        this.blueScore += 6
+                    }
+                    if(this.middle == 1){
+                        this.blueScore += 8
+                    }
+                    if(this.auton == 1){
+                        this.blueScore += 12
+                    }
+                    if(this.blueParked == 1){
+                        this.blueScore += 8
+                    }
+                    if(this.blueParked == 2){
+                        this.blueScore += 16
+                    }
+
+                    if(this.auton == 0){
+                        this.blueScore += 6
+                        this.redScore += 6
+                    }
+                    
+                }
+            }
+        });
+        app.mount('#app');
+    </script>
+    
+    <!-- Load external JavaScript (assuming you have a scripts.js file) -->
+    <script src="scripts.js"></script>
+</body>
+</html>
