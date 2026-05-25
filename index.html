@@ -53,6 +53,10 @@
         </div>
     </div>
         <hr />
+        <button :class="{'btn-none': auton==0, 'btn-blue-win': auton==1, 'btn-red-win': auton==2}" @click="autonTogg">
+            Auton Bonus: {{ auton == 0 ? 'None' : (auton == 1 ? 'Blue' : 'Red') }}
+        </button>
+        <hr />
         <button class="btn-red" @click="parkRTogg">Red Parked Robots {{redParked}}</button>
         <button class="btn-blue" @click="parkBTogg">Blue Parked Robots {{blueParked}}</button>
     </div>
