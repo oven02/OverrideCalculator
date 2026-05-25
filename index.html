@@ -20,7 +20,7 @@
         <h2 class="blue-text">Blue: {{ blueScore }}</h2>
     </div>
         <hr />
-        <h3>Blocks</h3>
+        <h3>Colored Pins</h3>
         <div class="block-controls">
         <!-- Red Section -->
         <div class="team-section">
@@ -34,11 +34,10 @@
             <button class="btn-blue" @click="subBlue()">-</button>
             <p>Blue Pins: <strong>{{blueBlocks}}</strong></p>
         </div>
-    </div>
         <hr />
         </div>
         <hr />
-        <h3>Blocks</h3>
+        <h3>Neutral Pins</h3>
         <div class="block-controls">
         <!-- Red Section -->
         <div class="team-section">
@@ -121,7 +120,7 @@
                         this.blueNBlocks--
                     }
                     this.calScore()
-                }
+                },
                 autonTogg(){
                     this.auton ++
                     if(this.auton > 2){
@@ -144,19 +143,8 @@
                     this.calScore()
                 },
                 calScore(){
-                    this.redScore = this.redBlocks * 3
-                    if(this.long1 == 2){
-                        this.redScore += 10
-                    }
-                    if(this.long2 == 2){
-                        this.redScore += 10
-                    }
-                    if(this.low == 2){
-                        this.redScore += 6
-                    }
-                    if(this.middle == 2){
-                        this.redScore += 8
-                    }
+                    this.redScore = this.redBlocks * 5
+                    this.redScore += this.redNBlocks * 10
                     if(this.auton == 2){
                         this.redScore += 12
                     }
@@ -167,19 +155,8 @@
                         this.redScore += 16
                     }
 
-                    this.blueScore = this.blueBlocks * 3
-                    if(this.long1 == 1){
-                        this.blueScore += 10
-                    }
-                    if(this.long2 == 1){
-                        this.blueScore += 10
-                    }
-                    if(this.low == 1){
-                        this.blueScore += 6
-                    }
-                    if(this.middle == 1){
-                        this.blueScore += 8
-                    }
+                    this.blueScore = this.blueBlocks * 5
+                    this.blueScore += this.blueNBlocks * 10
                     if(this.auton == 1){
                         this.blueScore += 12
                     }
